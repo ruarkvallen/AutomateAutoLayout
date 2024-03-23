@@ -45,7 +45,8 @@ function findVectorElement(node: SceneNode): boolean {
   return result;
 }
 
-
+//Need to fix vector flattening to accomodate other layots
+//Must keep on flattening svg while there is an svg sibling
 function flattenVectors(node: SceneNode):void{
   console.log('test function ran')
   let endWhile = false;
@@ -60,6 +61,9 @@ function flattenVectors(node: SceneNode):void{
   }
 }
 
+function autoLayoutSimpleButtons(node: SceneNode):void{
+
+}
 
 // Function to start the search from the selected node
 function startSearch(): void {
