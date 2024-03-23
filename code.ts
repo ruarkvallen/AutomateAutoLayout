@@ -23,7 +23,6 @@ function createRectangles(){
 */
 
 // Set to keep track of visited parent nodes
-const visitedParents: Set<string> = new Set();
 let currentNodeChildren: SceneNode[] = [];
 
 // Function to find a vector element recursively
@@ -46,22 +45,8 @@ function findVectorElement(node: SceneNode): boolean {
   return result;
 }
 
-function runThroughChildren(node: SceneNode): void{
-  if('children' in node){
-    for (const child of node.children){
-      // if(findVectorElement(child)){
-      //   console.log('Child to flatten',child);
-      //   figma.flatten([node]);
-      // }
-      //console.log(findVectorElement(child));
-      console.log('Running through each child',child);
-    }
-  }
-}
 
-
-
-function testFunction(node: SceneNode):void{
+function flattenVectors(node: SceneNode):void{
   console.log('test function ran')
   let endWhile = false;
   if('children' in node){
@@ -69,11 +54,12 @@ function testFunction(node: SceneNode):void{
       endWhile = findVectorElement(child);
       if(endWhile) {
         figma.flatten([node]);
-        break
+        break;
       }
     }
   }
 }
+
 
 // Function to start the search from the selected node
 function startSearch(): void {
@@ -81,14 +67,9 @@ function startSearch(): void {
   const selectedNode = figma.currentPage.selection[0] as SceneNode;
   // Check if a node is selected
   if (selectedNode && 'children' in selectedNode) {
-    // Log the names of the children
-    
     currentNodeChildren = [...selectedNode.children]
-    console.log(currentNodeChildren);
     for (const child of currentNodeChildren) {
-    //   //runThroughChildren(child);
-          console.log('running top children', currentNodeChildren)
-          testFunction(child);
+          flattenVectors(child);
     }
   } else {
     console.log('Please select a node.');
